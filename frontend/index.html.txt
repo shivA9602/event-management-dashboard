@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Management Dashboard</title>
+</head>
+<body>
+  <h1>Event Management Dashboard</h1>
+  <div>
+    <h2>Create Event</h2>
+    <form id="event-form">
+      <input type="text" id="event-name" placeholder="Event Name" required />
+      <input type="text" id="event-description" placeholder="Event Description" required />
+      <input type="text" id="event-location" placeholder="Event Location" required />
+      <input type="date" id="event-date" required />
+      <button type="submit">Create Event</button>
+    </form>
+  </div>
+  <div>
+    <h2>All Events</h2>
+    <ul id="events-list"></ul>
+  </div>
+
+  <script>
+    const form = document.getElementById('event-form');
+    const eventList = document.getElementById('events-list');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const name = document.getElementById('event-name').value;
+      const description = document.getElementById('event-description').value;
+      const location = document.getElementById('event-location').value;
+      const date = document.getElementById('event-date').value;
+      
+      const response = await fetch('http://localhost:5000/api/events', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name, description, location, date })
+      });
+      
+      const data = await response.json();
+      const listItem = document.createElement('li');
+      listItem.textContent = `${data.name} - ${data.date}`;
+      eventList.appendChild(listItem);
+    });
+
+    async function getEvents() {
+      const response = await fetch('http://localhost:5000/api/events');
+      const events = await response.json();
+      
+      events.forEach(event => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `${event.name} - ${event.date}`;
+        eventList.appendChild(listItem);
+      });
+    }
+
+    getEvents();
+  </script>
+</body>
+</html>
