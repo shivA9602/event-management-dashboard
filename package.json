@@ -1,0 +1,23 @@
+{
+  "name": "event-management-dashboard",
+  "version": "1.0.0",
+  "description": "Event Management Dashboard  This Event Management Dashboard is a web application built to streamline the creation, management, and tracking of events, tasks, and attendees. The application leverages Node.js with Express for the backend and MongoDB for data storage, providing a simple and efficient way to manage events",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongodb-memory-server": "^10.1.2",
+    "mongoose": "^8.9.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
